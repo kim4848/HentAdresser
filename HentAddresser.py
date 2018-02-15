@@ -18,10 +18,14 @@ if len(Postnummer)>0:
 else:
     Postnummer=''
  
-
 content = urllib2.urlopen('http://dawa.aws.dk/adresser?vejnavn='+Vejnavn+Husnummer+Postnummer).read()
-data = json.JSONDecoder(content)
+data = json.JSONDecoder()
+response=data.decode(content)
 
-print content
+if len(response)>0:
+ for adr in response:
+  print adr['adressebetegnelse']
+
+print 'Antal records : '+ str(len(response))
 
 
